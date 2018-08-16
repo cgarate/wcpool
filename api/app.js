@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var bodyParser = require('body-parser');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -22,10 +23,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+// Connect to Mongo
+const MongoClient = require('mongodb').MongoClient;
+const MONGODB_URI = "mongodb://localhost:27017/wcpool";
+
+(async function() {
+  const MONGODB_URI = "mongodb://localhost:27017/wcpool";
+  const dbName = 'wcpool';
+  let client;
+
+  try {
+    client = await MongoClient.connect(MONGODB_URI, { useNewUrlParser: true, });
+    console.log("Connected Correctly To Server");
+    const db = client.db(dbName);
+
+    const DataHelpers = require("./lib/data-helpers.js")(db);
+    const wcpoolRoutes = require("./routes/wcpool")(DataHelpers);
+    app.use('/wcpool', wcpoolRoutes);
+    
+  } catch (err) {
+    console.log(err.stack);
+  }
+
+})();
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -37,5 +57,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
