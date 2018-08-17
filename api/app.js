@@ -5,6 +5,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require('dotenv').config();
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -25,10 +27,10 @@ app.use('/users', usersRouter);
 
 // Connect to Mongo
 const MongoClient = require('mongodb').MongoClient;
-const MONGODB_URI = "mongodb://localhost:27017/wcpool";
 
 (async function() {
-  const MONGODB_URI = "mongodb://localhost:27017/wcpool";
+  // const MONGODB_URI = "mongodb://localhost:27017/wcpool";
+  const MONGODB_URI = process.env.MONGO_DB_URI;
   const dbName = 'wcpool';
   let client;
 
