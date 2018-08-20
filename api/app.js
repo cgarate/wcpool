@@ -10,6 +10,7 @@ require("dotenv").config();
 
 var indexRouter = require("./routes/index");
 var groups = require("./routes/groups");
+var users = require("./routes/users");
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/groups", groups);
+app.use("/users", users);
 
 // Connect to Mongoose
 mongoose.Promise = global.Promise;
