@@ -6,7 +6,7 @@
     "@okta/okta-react": "^1.0.1",
     "flow-bin": "^0.72.0",
     "luxon": "^1.2.0",
-    "mongodb": "^3.1.0-beta4",
+    "mongodb": "^3.1.13",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-router": "^4.2.0",
