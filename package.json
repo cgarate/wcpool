@@ -5,7 +5,7 @@
   "dependencies": {
     "@okta/okta-react": "^1.0.1",
     "flow-bin": "^0.72.0",
-    "luxon": "^1.2.0",
+    "luxon": "^2.5.2",
     "mongodb": "^3.1.13",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
